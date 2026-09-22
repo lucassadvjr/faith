@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%" fill="none">
+  <defs>
+    <radialGradient id="crossAura" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FFF2D1" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#D6B56A" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#D6B56A" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="crossGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E7" />
+      <stop offset="50%" stop-color="#D6B56A" />
+      <stop offset="100%" stop-color="#A58338" />
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="28" r="26" fill="url(#crossAura)" />
+  <rect x="29.5" y="8" width="5" height="48" rx="2" fill="url(#crossGold)" filter="drop-shadow(0 0 4px rgba(214,181,106,0.6))" />
+  <rect x="16" y="22" width="32" height="5" rx="2" fill="url(#crossGold)" filter="drop-shadow(0 0 4px rgba(214,181,106,0.6))" />
+</svg>

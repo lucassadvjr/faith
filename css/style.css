@@ -1,0 +1,1360 @@
+/* ==========================================================================
+   LUZ & FÉ — EXPERIÊNCIA CINEMATOGRÁFICA CONTROLADA POR SCROLL
+   Conceito: TREVA -> PECADO -> CRUZ -> LUZ -> FÉ -> ESPERANÇA -> SALVAÇÃO
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIÁVEIS CSS E DESIGN SYSTEM
+   -------------------------------------------------------------------------- */
+:root {
+  /* Paleta cromática */
+  --bg-dark: #050505;
+  --bg-dark-secondary: #0D0D0D;
+  --bg-dark-card: rgba(18, 18, 18, 0.75);
+  --bg-warm-dark: #12100B;
+  --text-light: #F5F3EE;
+  --text-muted: #A8A8A8;
+  --text-dim: #707070;
+  --gold-accent: #D6B56A;
+  --gold-light: #F5E0A3;
+  --gold-dark: #9C7E3A;
+  --gold-glow: rgba(214, 181, 106, 0.25);
+  --gold-glow-intense: rgba(214, 181, 106, 0.5);
+  --border-subtle: rgba(245, 243, 238, 0.08);
+  --border-gold: rgba(214, 181, 106, 0.35);
+
+  /* Tipografia */
+  --font-serif-title: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  --font-serif-verse: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Espaçamentos e Layout */
+  --header-height: 80px;
+  --container-max: 1240px;
+  --section-padding: clamp(80px, 12vh, 150px) 24px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* Easing cinematográfico */
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.8s var(--ease-cinematic);
+  --transition-medium: 0.4s var(--ease-cinematic);
+  --transition-fast: 0.2s ease;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET E REGRAS GERAIS
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Link de Acessibilidade */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 20px;
+  background: var(--gold-accent);
+  color: #000;
+  padding: 10px 18px;
+  font-weight: 600;
+  z-index: 99999;
+  border-radius: var(--radius-sm);
+  transition: top var(--transition-fast);
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 20px;
+}
+
+/* Foco acessível */
+:focus-visible {
+  outline: 2px solid var(--gold-accent);
+  outline-offset: 4px;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(16px, 4vw, 32px);
+  padding-right: clamp(16px, 4vw, 32px);
+}
+
+/* --------------------------------------------------------------------------
+   3. TIPOGRAFIA CINEMATOGRÁFICA
+   -------------------------------------------------------------------------- */
+.heading-hero {
+  font-family: var(--font-serif-title);
+  font-size: clamp(2.2rem, 6.5vw, 4.8rem);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  line-height: 1.15;
+  text-shadow: 0 0 40px var(--gold-glow);
+}
+
+.heading-section {
+  font-family: var(--font-serif-title);
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  line-height: 1.25;
+}
+
+.heading-section.gold-glow {
+  text-shadow: 0 0 30px var(--gold-glow);
+}
+
+.subtitle-hero {
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.verse-highlight {
+  font-family: var(--font-serif-verse);
+  font-size: clamp(1.35rem, 2.8vw, 1.95rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--text-light);
+  line-height: 1.5;
+  position: relative;
+}
+
+.verse-reference {
+  display: block;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: clamp(0.78rem, 1.4vw, 0.92rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-accent);
+  margin-top: 14px;
+}
+
+.body-lead {
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.85;
+}
+
+/* --------------------------------------------------------------------------
+   4. COMPONENTES VISUAIS & BOTÕES
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 36px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-medium);
+  touch-action: manipulation;
+}
+
+.btn-primary {
+  background: transparent;
+  color: var(--text-light);
+  border: 1px solid var(--gold-accent);
+  box-shadow: 0 0 20px var(--gold-glow);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(214, 181, 106, 0.2), rgba(214, 181, 106, 0.05));
+  opacity: 0;
+  transition: opacity var(--transition-medium);
+}
+
+.btn-primary:hover {
+  color: #FFF;
+  border-color: var(--gold-light);
+  box-shadow: 0 0 35px var(--gold-glow-intense);
+  transform: translateY(-2px);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-gold-solid {
+  background: linear-gradient(135deg, #E6C77E 0%, #D6B56A 50%, #B89647 100%);
+  color: #0A0A0A;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: 700;
+  box-shadow: 0 4px 25px rgba(214, 181, 106, 0.35);
+}
+
+.btn-gold-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 35px rgba(214, 181, 106, 0.6);
+  filter: brightness(1.08);
+}
+
+/* Indicador de Seção / Tag sutil */
+.section-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-accent);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.section-tag::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold-accent);
+  margin: 10px auto 0;
+  opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   5. HEADER & NAVEGAÇÃO FIXA
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  z-index: 1000;
+  transition: background-color var(--transition-medium),
+              backdrop-filter var(--transition-medium),
+              border-color var(--transition-medium),
+              box-shadow var(--transition-medium);
+  border-bottom: 1px solid transparent;
+}
+
+.site-header.header-scrolled {
+  background-color: rgba(5, 5, 5, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: var(--border-subtle);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-serif-title);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--text-light);
+  transition: opacity var(--transition-fast);
+}
+
+.brand-logo:hover {
+  opacity: 0.9;
+}
+
+.brand-icon {
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 0 6px var(--gold-glow));
+}
+
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.nav-link {
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  position: relative;
+  padding: 8px 0;
+  transition: color var(--transition-fast);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background: var(--gold-accent);
+  transition: width var(--transition-medium), left var(--transition-medium);
+  transform: translateX(-50%);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-light);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Botão Hamburger Mobile */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  z-index: 1010;
+  position: relative;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 1.5px;
+  background-color: var(--text-light);
+  transition: transform var(--transition-medium), opacity var(--transition-medium);
+  margin: 3.5px 0;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+  transform: translateY(8.5px) rotate(45deg);
+}
+
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+  transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* Drawer Menu Mobile */
+.mobile-nav-drawer {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(5, 5, 5, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 1005;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 24px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-15px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.mobile-nav-drawer.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  text-align: center;
+}
+
+.mobile-nav-link {
+  font-family: var(--font-serif-title);
+  font-size: 1.45rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  transition: color var(--transition-fast);
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--gold-accent);
+}
+
+/* --------------------------------------------------------------------------
+   6. HERO INICIAL (INTRODUÇÃO ELEGANTE E MINIMALISTA)
+   -------------------------------------------------------------------------- */
+.hero-intro {
+  position: relative;
+  width: 100%;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 60px;
+  background-color: var(--bg-dark);
+  overflow: hidden;
+}
+
+.hero-intro-ambient {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 95vw);
+  height: 450px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(214, 181, 106, 0.12) 0%,
+    rgba(214, 181, 106, 0.03) 50%,
+    transparent 75%
+  );
+  pointer-events: none;
+  filter: blur(60px);
+}
+
+.hero-intro-content {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+}
+
+.hero-intro-verse {
+  margin: 32px auto 40px;
+  max-width: 580px;
+  padding: 18px 24px;
+  background: rgba(13, 13, 13, 0.6);
+  border-left: 2px solid var(--gold-accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero-intro-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.hero-scroll-prompt {
+  margin-top: 50px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.hero-scroll-prompt:hover {
+  color: var(--gold-accent);
+  transform: translateY(3px);
+}
+
+.scroll-prompt-text {
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.scroll-prompt-icon {
+  animation: promptBounce 2s infinite ease-in-out;
+}
+
+@keyframes promptBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* --------------------------------------------------------------------------
+   7. SEÇÃO PRINCIPAL — A JORNADA DA FÉ (SCROLL-DRIVEN STICKY STORY)
+   -------------------------------------------------------------------------- */
+.faith-journey {
+  position: relative;
+  width: 100%;
+  /* 380vh de trilha de rolagem para controle progressivo, calmo e cinematográfico */
+  height: 380vh;
+  background-color: var(--bg-dark);
+}
+
+/* Container Sticky que permanece fixo na viewport enquanto o usuário percorre a seção */
+.journey-sticky-wrapper {
+  position: sticky;
+  top: 10vh;
+  height: 82vh;
+  max-height: 860px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.journey-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 64px);
+  width: 100%;
+  height: 100%;
+}
+
+/* Coluna de Texto Narrativo */
+.journey-text-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 0;
+  z-index: 2;
+}
+
+.stage-badge-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stage-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-accent);
+  background: rgba(214, 181, 106, 0.1);
+  padding: 6px 14px;
+  border: 1px solid rgba(214, 181, 106, 0.3);
+  border-radius: var(--radius-sm);
+}
+
+.stage-subbadge {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Container dos 5 Estágios de Texto */
+.journey-stages {
+  position: relative;
+  min-height: 250px;
+}
+
+.journey-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.journey-stage.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+  position: relative;
+}
+
+.stage-tag {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-accent);
+  margin-bottom: 12px;
+}
+
+.stage-title {
+  font-family: var(--font-serif-title);
+  font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.stage-text {
+  font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 480px;
+}
+
+.stage-verse {
+  font-family: var(--font-serif-verse);
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  font-style: italic;
+  color: var(--text-light);
+  border-left: 2px solid var(--gold-accent);
+  padding-left: 18px;
+  margin-top: 18px;
+  line-height: 1.55;
+  background: rgba(13, 13, 13, 0.4);
+  padding: 16px 20px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.stage-verse-ref {
+  display: block;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-accent);
+  margin-top: 10px;
+}
+
+/* Barra de Progresso Visual */
+.journey-progress-container {
+  margin-top: 36px;
+  max-width: 420px;
+}
+
+.journey-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(245, 243, 238, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.journey-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(to right, #A8863A, var(--gold-accent), #FFF2D1);
+  box-shadow: 0 0 10px var(--gold-accent);
+  transition: width 0.08s linear;
+}
+
+.journey-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--text-dim);
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
+/* Coluna Visual — O Crucifixo Centralizado com Espaço ao Redor */
+.faith-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.crucifix-frame {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 440px;
+  /* Altura proporcional entre 65vh e 75vh sem ocupar a tela inteira */
+  height: clamp(380px, 70vh, 600px);
+  margin: 0 auto;
+}
+
+/* Halo luminoso sutil que cresce conforme o scroll avança */
+.crucifix-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130%;
+  height: 130%;
+  background: radial-gradient(
+    circle at 50% 38%,
+    rgba(214, 181, 106, 0.45) 0%,
+    rgba(214, 181, 106, 0.12) 48%,
+    transparent 75%
+  );
+  filter: blur(40px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  will-change: opacity;
+  transition: opacity 0.1s linear;
+}
+
+/* Moldura das imagens sobrepostas */
+.crucifix-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: #000;
+  border: 1px solid rgba(214, 181, 106, 0.2);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(214, 181, 106, 0.15);
+  z-index: 2;
+}
+
+/* Ambas as imagens possuem exata sobreposição, aspect ratio e object-fit: contain */
+.crucifix {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.crucifix-dark {
+  z-index: 1;
+  opacity: 1;
+}
+
+.crucifix-light {
+  z-index: 2;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.05s linear;
+}
+
+/* --------------------------------------------------------------------------
+   8. SEÇÃO — A PALAVRA (A PALAVRA É LUZ PARA O CAMINHO)
+   -------------------------------------------------------------------------- */
+.section-word {
+  padding: var(--section-padding);
+  background-color: var(--bg-dark-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.word-hero-block {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 60px;
+}
+
+.verse-card-glow {
+  margin: 28px auto;
+  padding: 28px 32px;
+  background: rgba(13, 13, 13, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--gold-accent);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.word-visual-container {
+  max-width: 480px;
+  margin: 0 auto 50px;
+  position: relative;
+}
+
+.word-visual-container img,
+.word-visual-container svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.8));
+}
+
+.word-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 50px;
+}
+
+.word-pillar-card {
+  padding: 32px 24px;
+  background: rgba(22, 22, 22, 0.55);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  text-align: left;
+  transition: all var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.word-pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold-accent), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-medium);
+}
+
+.word-pillar-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(214, 181, 106, 0.3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+.word-pillar-card:hover::before {
+  opacity: 1;
+}
+
+.pillar-icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 20px;
+  color: var(--gold-accent);
+}
+
+.pillar-title {
+  font-family: var(--font-serif-title);
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+
+.pillar-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* --------------------------------------------------------------------------
+   9. SEÇÃO — REFLEXÃO (NO SILÊNCIO, OUÇA.)
+   -------------------------------------------------------------------------- */
+.section-reflection {
+  padding: var(--section-padding);
+  background-color: var(--bg-dark);
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Canvas para partículas lentas e discretas */
+#particles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.reflection-content {
+  position: relative;
+  z-index: 2;
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.contemplation-orb-wrapper {
+  margin: 45px auto 35px;
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contemplation-orb {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214, 181, 106, 0.35) 0%, rgba(214, 181, 106, 0.08) 55%, transparent 75%);
+  border: 1px solid rgba(214, 181, 106, 0.35);
+  box-shadow: 0 0 35px var(--gold-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: contemplativeBreath 7s ease-in-out infinite;
+}
+
+.contemplation-orb-inner {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FFF;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes contemplativeBreath {
+  0%, 100% {
+    transform: scale(0.92);
+    box-shadow: 0 0 20px rgba(214, 181, 106, 0.2);
+    border-color: rgba(214, 181, 106, 0.25);
+  }
+  50% {
+    transform: scale(1.12);
+    box-shadow: 0 0 45px rgba(214, 181, 106, 0.5);
+    border-color: rgba(245, 224, 163, 0.6);
+  }
+}
+
+.reflection-hint {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-accent);
+}
+
+/* --------------------------------------------------------------------------
+   10. SEÇÃO FINAL — CTA (SALVAÇÃO: CREIA. CONFIE. SIGA A LUZ.)
+   -------------------------------------------------------------------------- */
+.section-salvation {
+  padding: clamp(100px, 15vh, 180px) 24px;
+  background-color: #020202;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.salvation-spotlight {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 900px;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    rgba(214, 181, 106, 0.15) 0%,
+    rgba(214, 181, 106, 0.04) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.salvation-content {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.salvation-verse-wrap {
+  margin: 36px auto 44px;
+  max-width: 640px;
+}
+
+/* --------------------------------------------------------------------------
+   11. FOOTER
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background-color: #030303;
+  border-top: 1px solid var(--border-subtle);
+  padding: 60px 24px 40px;
+  text-align: center;
+  position: relative;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+}
+
+.footer-link {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.footer-link:hover {
+  color: var(--gold-accent);
+}
+
+.footer-motto {
+  font-family: var(--font-serif-verse);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--container-max);
+  padding-top: 30px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.btn-back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.btn-back-to-top:hover {
+  color: var(--gold-accent);
+}
+
+/* --------------------------------------------------------------------------
+   12. MODAL / DIALOG DE ORAÇÃO & ESPERANÇA
+   -------------------------------------------------------------------------- */
+dialog.prayer-dialog {
+  margin: auto;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  background-color: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--text-light);
+  max-width: 600px;
+  width: 90%;
+  padding: 0;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 50px var(--gold-glow);
+  overflow: hidden;
+}
+
+dialog.prayer-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.modal-title {
+  font-family: var(--font-serif-title);
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  color: var(--gold-accent);
+}
+
+.modal-close-btn {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-muted);
+  padding: 4px 8px;
+  transition: color var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  color: var(--text-light);
+}
+
+.modal-body {
+  padding: 28px;
+  line-height: 1.8;
+}
+
+.modal-verse {
+  font-family: var(--font-serif-verse);
+  font-size: 1.3rem;
+  font-style: italic;
+  margin-bottom: 20px;
+  padding-left: 16px;
+  border-left: 2px solid var(--gold-accent);
+  color: #FFF;
+}
+
+.modal-prayer-text {
+  font-size: 0.96rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 28px;
+  background: rgba(5, 5, 5, 0.5);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   13. ANIMAÇÕES REVEAL NO SCROLL
+   -------------------------------------------------------------------------- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 1s var(--ease-cinematic), transform 1s var(--ease-cinematic);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 0.12s; }
+.delay-200 { transition-delay: 0.24s; }
+.delay-300 { transition-delay: 0.36s; }
+.delay-400 { transition-delay: 0.48s; }
+
+/* --------------------------------------------------------------------------
+   14. RESPONSIVIDADE (MOBILE & TABLET BREAKPOINTS)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  :root {
+    --header-height: 70px;
+  }
+
+  .nav-desktop {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  /* Ajustes do layout da jornada no tablet e mobile */
+  .journey-sticky-wrapper {
+    top: calc(var(--header-height) + 1vh);
+    height: 84vh;
+  }
+
+  .journey-inner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .journey-text-col {
+    align-items: center;
+    text-align: center;
+    padding: 0;
+  }
+
+  .stage-badge-wrap {
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .journey-stages {
+    min-height: 140px;
+    width: 100%;
+  }
+
+  .stage-title {
+    font-size: clamp(1.4rem, 4.5vw, 1.9rem);
+    margin-bottom: 8px;
+  }
+
+  .stage-text {
+    font-size: 0.95rem;
+    margin: 0 auto;
+  }
+
+  .stage-verse {
+    font-size: 1.05rem;
+    margin-top: 10px;
+    padding: 10px 14px;
+    text-align: center;
+    border-left: none;
+    border-top: 2px solid var(--gold-accent);
+    border-radius: var(--radius-sm);
+  }
+
+  .journey-progress-container {
+    margin: 14px auto 0;
+    width: 90%;
+    max-width: 320px;
+  }
+
+  .crucifix-frame {
+    max-width: 320px;
+    height: clamp(260px, 42vh, 380px);
+    margin: 6px auto;
+  }
+
+  .word-pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --section-padding: 70px 18px;
+  }
+
+  .hero-intro {
+    min-height: 80vh;
+    padding: 100px 18px 40px;
+  }
+
+  .crucifix-frame {
+    width: 88%;
+    max-width: 290px;
+    height: clamp(240px, 38vh, 330px);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15. ACESSIBILIDADE — PREFERS-REDUCED-MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .faith-journey {
+    height: auto !important;
+    padding: 60px 0 !important;
+  }
+
+  .journey-sticky-wrapper {
+    position: static !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .journey-stages {
+    position: static !important;
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+  }
+
+  .journey-stage {
+    position: static !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: all !important;
+  }
+
+  .crucifix-light {
+    opacity: 1 !important;
+  }
+
+  .crucifix-glow {
+    opacity: 0.6 !important;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Celestial Radial Glow -->
+    <radialGradient id="celestialGlow" cx="50%" cy="65%" r="60%">
+      <stop offset="0%" stop-color="#FFF2D1" stop-opacity="0.9" />
+      <stop offset="35%" stop-color="#D6B56A" stop-opacity="0.45" />
+      <stop offset="65%" stop-color="#D6B56A" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#050505" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Divine Vertical Beam -->
+    <linearGradient id="verticalBeam" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#D6B56A" stop-opacity="0.5" />
+      <stop offset="30%" stop-color="#FFF8E7" stop-opacity="0.3" />
+      <stop offset="80%" stop-color="#FFF" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Page Gradients -->
+    <linearGradient id="pageLeft" x1="100%" y1="50%" x2="0%" y2="50%">
+      <stop offset="0%" stop-color="#E8E2D2" />
+      <stop offset="25%" stop-color="#FBF9F5" />
+      <stop offset="85%" stop-color="#EDE7DA" />
+      <stop offset="100%" stop-color="#C7BFAB" />
+    </linearGradient>
+    <linearGradient id="pageRight" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#E8E2D2" />
+      <stop offset="25%" stop-color="#FBF9F5" />
+      <stop offset="85%" stop-color="#EDE7DA" />
+      <stop offset="100%" stop-color="#C7BFAB" />
+    </linearGradient>
+
+    <!-- Cover Texture & Shadow -->
+    <linearGradient id="coverShade" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1815" />
+      <stop offset="50%" stop-color="#0D0C0B" />
+      <stop offset="100%" stop-color="#050505" />
+    </linearGradient>
+
+    <!-- Gold Accent Line -->
+    <linearGradient id="goldRibbon" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F5E0A3" />
+      <stop offset="50%" stop-color="#D6B56A" />
+      <stop offset="100%" stop-color="#9C7E3A" />
+    </linearGradient>
+  </defs>
+
+  <style>
+    .glow-aura { animation: pulseGlow 5s ease-in-out infinite alternate; }
+    .light-rays { animation: rayRotate 24s linear infinite; transform-origin: 300px 300px; }
+    @keyframes pulseGlow {
+      0% { opacity: 0.65; transform: scale(0.98); transform-origin: 300px 300px; }
+      100% { opacity: 1; transform: scale(1.02); transform-origin: 300px 300px; }
+    }
+  </style>
+
+  <!-- Ambient Light Backing -->
+  <circle cx="300" cy="280" r="240" fill="url(#celestialGlow)" class="glow-aura" />
+
+  <!-- Rays of Light -->
+  <g opacity="0.35" class="light-rays">
+    <path d="M300,280 L230,20 L270,10 Z" fill="url(#verticalBeam)" />
+    <path d="M300,280 L330,10 L370,20 Z" fill="url(#verticalBeam)" />
+    <path d="M300,280 L160,70 L195,50 Z" fill="url(#verticalBeam)" />
+    <path d="M300,280 L405,50 L440,70 Z" fill="url(#verticalBeam)" />
+    <path d="M300,280 L90,140 L120,115 Z" fill="url(#verticalBeam)" />
+    <path d="M300,280 L480,115 L510,140 Z" fill="url(#verticalBeam)" />
+    <path d="M300,280 L290,0 L310,0 Z" fill="url(#verticalBeam)" opacity="0.7" />
+  </g>
+
+  <!-- Ascending Light Core -->
+  <polygon points="260,290 300,40 340,290" fill="url(#verticalBeam)" opacity="0.75" />
+
+  <!-- Bible Drop Shadow -->
+  <ellipse cx="300" cy="385" rx="230" ry="24" fill="#000" opacity="0.85" filter="blur(8px)" />
+
+  <!-- Book Leather Cover Base -->
+  <path d="M90,340 C170,352 245,348 300,358 C355,348 430,352 510,340 C515,340 518,348 514,354 C435,372 360,366 300,378 C240,366 165,372 86,354 C82,348 85,340 90,340 Z" fill="url(#coverShade)" stroke="#2A241A" stroke-width="1.5" />
+
+  <!-- Bottom Page Stack (Gilded edges) -->
+  <path d="M95,332 C175,344 245,340 300,350 C355,340 425,344 505,332 L510,340 C430,352 355,348 300,358 C245,348 170,352 90,340 Z" fill="#9C7E3A" opacity="0.7" />
+  <path d="M98,326 C176,338 246,334 300,344 C354,334 424,338 502,326 L505,332 C425,344 355,340 300,350 C245,340 175,344 95,332 Z" fill="#D6B56A" opacity="0.9" />
+
+  <!-- Left Open Page -->
+  <path d="M300,338 C240,328 170,330 102,316 C98,315 96,310 98,306 C105,290 115,260 120,248 C185,258 250,265 300,285 Z" fill="url(#pageLeft)" />
+  <path d="M300,332 C242,324 172,326 106,312 C103,311 101,308 103,304 C109,288 118,258 123,246 C186,256 250,262 300,280 Z" fill="url(#pageLeft)" />
+  <path d="M300,325 C244,318 175,320 110,307 C107,306 106,303 107,300 C114,284 122,254 127,242 C188,252 251,258 300,274 Z" fill="url(#pageLeft)" stroke="#E5DECB" stroke-width="0.5" />
+
+  <!-- Right Open Page -->
+  <path d="M300,338 C360,328 430,330 498,316 C502,315 504,310 502,306 C495,290 485,260 480,248 C415,258 350,265 300,285 Z" fill="url(#pageRight)" />
+  <path d="M300,332 C358,324 428,326 494,312 C497,311 499,308 497,304 C491,288 482,258 477,246 C414,256 350,262 300,280 Z" fill="url(#pageRight)" />
+  <path d="M300,325 C356,318 425,320 490,307 C493,306 494,303 493,300 C486,284 478,254 473,242 C412,252 349,258 300,274 Z" fill="url(#pageRight)" stroke="#E5DECB" stroke-width="0.5" />
+
+  <!-- Spine Center Glow and Depth -->
+  <path d="M300,274 L300,344" stroke="#1D1913" stroke-width="2" opacity="0.6" />
+  <path d="M300,270 L300,346" stroke="#FFE9A8" stroke-width="1" opacity="0.8" filter="blur(1px)" />
+
+  <!-- Golden Bookmark Ribbon -->
+  <path d="M300,280 C306,310 295,340 304,370 C308,382 305,394 300,402 L290,394 L284,402 C286,386 288,375 292,360 C296,335 298,305 300,280 Z" fill="url(#goldRibbon)" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.5))" />
+
+  <!-- Subtle Scripture Typography Lines (Left Page) -->
+  <g opacity="0.32" stroke="#4A443B" stroke-width="1.8" stroke-linecap="round">
+    <line x1="145" y1="262" x2="200" y2="268" />
+    <line x1="142" y1="272" x2="220" y2="278" />
+    <line x1="140" y1="282" x2="230" y2="288" />
+    <line x1="138" y1="292" x2="235" y2="298" />
+    <line x1="135" y1="302" x2="225" y2="308" />
+
+    <line x1="215" y1="269" x2="275" y2="274" />
+    <line x1="230" y1="279" x2="278" y2="283" />
+    <line x1="240" y1="289" x2="280" y2="293" />
+    <line x1="245" y1="299" x2="282" y2="303" />
+  </g>
+
+  <!-- Subtle Scripture Typography Lines (Right Page) -->
+  <g opacity="0.32" stroke="#4A443B" stroke-width="1.8" stroke-linecap="round">
+    <line x1="325" y1="274" x2="385" y2="269" />
+    <line x1="322" y1="283" x2="370" y2="279" />
+    <line x1="320" y1="293" x2="360" y2="289" />
+    <line x1="318" y1="303" x2="355" y2="299" />
+
+    <line x1="400" y1="268" x2="455" y2="262" />
+    <line x1="380" y1="278" x2="458" y2="272" />
+    <line x1="370" y1="288" x2="460" y2="282" />
+    <line x1="365" y1="298" x2="462" y2="292" />
+    <line x1="375" y1="308" x2="465" y2="302" />
+  </g>
+
+  <!-- Golden Radiance Stars & Particles around the Word -->
+  <g fill="#FFF" opacity="0.8">
+    <circle cx="280" cy="180" r="2" />
+    <circle cx="330" cy="160" r="2.5" />
+    <circle cx="250" cy="210" r="1.5" />
+    <circle cx="360" cy="200" r="2" />
+    <circle cx="300" cy="120" r="3" fill="#FFE29E" />
+    <circle cx="220" cy="140" r="1.5" />
+    <circle cx="390" cy="150" r="1.5" />
+  </g>
+</svg>
